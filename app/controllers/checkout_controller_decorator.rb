@@ -8,7 +8,7 @@ Spree::CheckoutController.class_eval do
         puts "&&&&&&&&&&&&&&&&&&&&&&&&&"
         puts @order.payments.inspect
         @order.payments.last.response_code = params[:paymillToken]
-        @order.payment.last.save!
+        @order.payments.last.save!
       end
 
       unless @order.next
