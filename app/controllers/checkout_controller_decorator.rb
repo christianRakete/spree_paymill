@@ -5,8 +5,10 @@ Spree::CheckoutController.class_eval do
       return if after_update_attributes
       
       if params[:paymillToken].present?
-        @order.payment.response_code = params[:paymillToken]
-        @order.payment.save!
+        puts "&&&&&&&&&&&&&&&&&&&&&&&&&"
+        puts @order.payments.inspect
+        @order.payments.last.response_code = params[:paymillToken]
+        @order.payment.last.save!
       end
 
       unless @order.next
