@@ -1,12 +1,11 @@
 Spree::CheckoutController.class_eval do
+  
   def update
     if @order.update_attributes(object_params)
       fire_event('spree.checkout.update')
       return if after_update_attributes
       
       if params[:paymillToken].present?
-        puts "&&&&&&&&&&&&&&&&&&&&&&&&&"
-        puts @order.payments.inspect
         @order.payments.last.response_code = params[:paymillToken]
         @order.payments.last.save!
       end
@@ -28,4 +27,5 @@ Spree::CheckoutController.class_eval do
       render :edit
     end
   end
+  
 end
